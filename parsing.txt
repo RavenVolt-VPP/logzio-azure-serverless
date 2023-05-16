@@ -1,0 +1,45 @@
+{
+  "steps": [
+    {
+      "if": {
+        "condition": {
+          "fieldType": {
+            "path": "properties",
+            "type": "string"
+          }
+        },
+        "then": [
+          {
+            "gsub": {
+              "config": {
+                "field": "properties",
+                "pattern": "'",
+                "replacement": "\""
+              },
+              "onSuccess": [
+                {
+                  "json": {
+                    "config": {
+                      "field": "properties",
+                      "targetField": "properties"
+                    },
+                    "onSuccess": [
+                      {
+                        "json": {
+                          "config": {
+                            "field": "properties.log",
+                            "targetField": "properties.log"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
